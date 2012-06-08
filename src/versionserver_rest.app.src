@@ -1,4 +1,5 @@
 %%-*- mode: erlang -*-
+%% vim: set filetype=erlang:
 {application, versionserver_rest,
  [
   {description, "RESTful interface for the versionserver Erlang/OTP application"},
