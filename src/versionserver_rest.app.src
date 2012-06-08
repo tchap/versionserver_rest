@@ -1,0 +1,18 @@
+%%-*- mode: erlang -*-
+{application, versionserver_rest,
+ [
+  {description, "versionserver_rest"},
+  {vsn, "1"},
+  {modules, []},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  inets,
+                  crypto,
+                  mochiweb,
+                  webmachine
+                 ]},
+  {mod, { versionserver_rest_app, []}},
+  {env, []}
+ ]}.
