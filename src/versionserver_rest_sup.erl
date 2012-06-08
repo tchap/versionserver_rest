@@ -1,10 +1,10 @@
-%% @author author <author@example.com>
-%% @copyright YYYY author.
+%% @author Ondrej Kupka <ondra.cap@gmail.com>
+%% @copyright 2012 Ondrej Kupka.
 
 %% @doc Supervisor for the versionserver_rest application.
 
 -module(versionserver_rest_sup).
--author('author <author@example.com>').
+-author('Ondrej Kupka <ondra.cap@gmail.com>').
 
 -behaviour(supervisor).
 

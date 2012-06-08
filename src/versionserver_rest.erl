@@ -1,10 +1,10 @@
-%% @author author <author@example.com>
-%% @copyright YYYY author.
+%% @author Ondrej Kupka <ondra.cap@gmail.com>
+%% @copyright 2012 Ondrej Kupka.
 
 %% @doc versionserver_rest startup code
 
 -module(versionserver_rest).
--author('author <author@example.com>').
+-author('Ondrej Kupka <ondra.cap@gmail.com>').
 -export([start/0, start_link/0, stop/0]).
 
 ensure_started(App) ->
@@ -24,6 +24,7 @@ start_link() ->
     application:set_env(webmachine, webmachine_logger_module, 
                         webmachine_logger),
     ensure_started(webmachine),
+    ensure_started(versionserver),
     versionserver_rest_sup:start_link().
 
 %% @spec start() -> ok
@@ -35,12 +36,14 @@ start() ->
     application:set_env(webmachine, webmachine_logger_module, 
                         webmachine_logger),
     ensure_started(webmachine),
+    ensure_started(versionserver),
     application:start(versionserver_rest).
 
 %% @spec stop() -> ok
 %% @doc Stop the versionserver_rest server.
 stop() ->
     Res = application:stop(versionserver_rest),
+    application:stop(versionserver),
     application:stop(webmachine),
     application:stop(mochiweb),
     application:stop(crypto),

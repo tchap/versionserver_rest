@@ -1,9 +1,14 @@
 %%-*- mode: erlang -*-
 {application, versionserver_rest,
  [
-  {description, "versionserver_rest"},
+  {description, "RESTful interface for the versionserver Erlang/OTP application"},
   {vsn, "1"},
-  {modules, []},
+  {modules, [
+  	     versionserver_rest_app,
+  	     versionserver_rest_sup,
+  	     versionserver_rest,
+  	     versionserver_rest_resource
+	    ]},
   {registered, []},
   {applications, [
                   kernel,
@@ -11,7 +16,8 @@
                   inets,
                   crypto,
                   mochiweb,
-                  webmachine
+                  webmachine,
+		  versionserver
                  ]},
   {mod, { versionserver_rest_app, []}},
   {env, []}
