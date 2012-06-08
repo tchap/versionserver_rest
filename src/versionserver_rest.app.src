@@ -3,7 +3,7 @@
 {application, versionserver_rest,
  [
   {description, "RESTful interface for the versionserver Erlang/OTP application"},
-  {vsn, "1"},
+  {vsn, "1.0.0"},
   {modules, [
   	     versionserver_rest_app,
   	     versionserver_rest_sup,
