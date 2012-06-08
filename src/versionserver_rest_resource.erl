@@ -54,25 +54,27 @@ next_build_number(ReqData) ->
 		integer_to_list(versionserver:next_build_number(Project,
 								Version))
 	catch
-		throw:query_string ->
-			{halt, 400};
-		error:Reason ->
-			{error, Reason}
+		throw:query_string -> 
+			{halt, 400}
 	end.
 
 delete_project(ReqData) ->
 	Project = get_project_name(ReqData),
-	versionserver:delete_project(Project).
-
-get_project_name(ReqData) ->
-	case wrq:path_info(project, ReqData) of
-		undefined ->
-			throw(query_string);
-		Binding ->
-			list_to_atom(Binding)
+	case catch versionserver:delete_project(Project) of
+		ok -> true;
+		{error, _} -> false;
+		{'EXIT', _} -> false
 	end.
 
+get_project_name(ReqData) ->
+	list_to_atom(wrq:path_info(project, ReqData)).
+
 get_version(ReqData) ->
-	F = fun(Q) -> list_to_integer(wrq:get_qs_value(Q, ReqData)) end,
-	[Major, Minor, Release] = lists:map(F, ["major", "minor", "release"]),
-	{Major, Minor, Release}.
+	try
+		F = fun(Q) -> list_to_integer(wrq:get_qs_value(Q, ReqData)) end,
+		[Major, Minor, Release] = lists:map(F, ["major", "minor", "release"]),
+		{Major, Minor, Release}
+	catch
+		error:badarg ->
+			throw(query_string)
+	end.

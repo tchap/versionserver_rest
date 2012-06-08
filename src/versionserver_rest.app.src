@@ -9,7 +9,7 @@
   	     versionserver_rest,
   	     versionserver_rest_resource
 	    ]},
-  {registered, []},
+  {registered, [versionserver_rest_sup]},
   {applications, [
                   kernel,
                   stdlib,
